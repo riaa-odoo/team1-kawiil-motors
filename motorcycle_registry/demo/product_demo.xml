@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="motorcycle_01" model="product.template">
+            <field name="detailed_type">motorcycle</field>
+            <field name="name">Raijin/S</field>
+            <field name="list_price">55000</field>
+            <field name="make">Kauil</field>
+            <field name="model">Raijin/S</field>
+            <field name="year">2023</field>
+            <field name="curb_weight">518</field>
+            <field name="launch_date" eval="(DateTime.today() - relativedelta(months=1)).strftime('%Y-%m-%d %H:%M')"/>
+            <field name="horsepower">110</field>
+            <field name="top_speed">124</field>
+            <field name="torque">140</field>
+            <field name="battery_capacity">xl</field>
+            <field name="charge_time">2.7</field>
+            <field name="range">187</field>
+        </record>
+        <record id="motorcycle_02" model="product.template">
+            <field name="detailed_type">motorcycle</field>
+            <field name="name">Indra Dual Sport</field>
+            <field name="list_price">22000</field>
+            <field name="make">Kauil</field>
+            <field name="model">Indra Dual Sport</field>
+            <field name="year">2023</field>
+            <field name="curb_weight">518</field>
+            <field name="launch_date" eval="(DateTime.today() - relativedelta(months=3)).strftime('%Y-%m-%d %H:%M')"/>
+            <field name="horsepower">46</field>
+            <field name="top_speed">98</field>
+            <field name="torque">78</field>
+            <field name="battery_capacity">xs</field>
+            <field name="charge_time">5.8</field>
+            <field name="range">68</field>
+        </record>
+        <record id="motorcycle_03" model="product.template">
+            <field name="detailed_type">motorcycle</field> 
+            <field name="name">Ukko Adventure</field>
+            <field name="make">Kauil</field>
+            <field name="model">Ukko Adventure</field>
+            <field name="year">2023</field>
+            <field name="curb_weight">544</field>
+            <field name="launch_date" eval="(DateTime.today() + relativedelta(months=1)).strftime('%Y-%m-%d %H:%M')"/>
+            <field name="horsepower">110</field>
+            <field name="top_speed">112</field>
+            <field name="torque">166</field>
+            <field name="battery_capacity">xl</field>
+            <field name="charge_time">2.7</field>
+            <field name="range">180</field>
+        </record>
+    </data>
+</odoo>      

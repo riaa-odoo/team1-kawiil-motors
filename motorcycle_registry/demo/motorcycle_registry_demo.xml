@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="registry_01" model="motorcycle.registry">
+            <field name="vin">KAIN220M00234</field>
+            <field name="current_mileage">10000</field>
+            <field name="owner_id" ref="base.res_partner_4"/>
+        </record>
+        <record id="registry_02" model="motorcycle.registry">
+            <field name="vin">KARA230L56392</field>
+            <field name="current_mileage">3400</field>
+            <field name="license_plate">KLV453</field>
+            <field name="owner_id" ref="base.res_partner_3"/>
+        </record>
+        <record id="registry_03" model="motorcycle.registry">
+            <field name="vin">KAUK21XL84732</field>
+            <field name="current_mileage">100</field>
+            <field name="license_plate">KLR3453L</field>
+            <field name="owner_id" ref="base.partner_demo_portal"/>
+        </record>
+    </data>
+</odoo>

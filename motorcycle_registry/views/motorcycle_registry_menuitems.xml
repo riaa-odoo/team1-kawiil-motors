@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.actions.act_window" id="registry_list_action">
+            <field name="name">Registry</field>
+            <field name="res_model">motorcycle.registry</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create the first Registry
+                </p>
+            </field>
+        </record>
+        <menuitem name="Motorcycle Registry"
+                  id="menu_registry"
+                  sequence="1"
+                  web_icon="motorcycle_registry,static/description/icon.png">
+
+            <menuitem id="menu_registry_sub" name="Motorcycle Registry" sequence="2">
+                <menuitem id="menu_academy_registry" name="Registry" sequence="3"
+                          action="registry_list_action"/>
+            </menuitem>
+        </menuitem>
+    </data>
+</odoo> 

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="motorcycle_compare">
+        <t t-call="website.layout">
+            <t t-set="title">Comparison</t>
+            <div class="oe_structure">
+                <div class="container">
+                    <h1>Motorcycle Comparison</h1>
+                    <div class="d-flex p-2 bd-highlight">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Specs</h5>
+                                <ul class="list-group">
+                                    <li class="list-group-item">Launch Date:</li>
+                                    <li class="list-group-item">Range:</li>
+                                    <li class="list-group-item">Horsepower:</li>
+                                    <li class="list-group-item">Torque:</li>
+                                    <li class="list-group-item">Top Speed:</li>
+                                    <li class="list-group-item">Battery Capacity:</li>
+                                    <li class="list-group-item">Curb Weight:</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <t t-foreach="products" t-as="product">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title"><t t-out="product.model"/></h5>
+                                    <ul class="list-group">
+                                        <li class="list-group-item"><img t-if="product.image_1920" t-att-src="image_data_uri(product.image_128)" alt="motorcycle image"/></li>
+                                        <li class="list-group-item"><t t-out="product.launch_date"/></li>
+                                        <li class="list-group-item"><t t-out="product.range"/></li>
+                                        <li class="list-group-item"><t t-out="product.horsepower"/></li>
+                                        <li class="list-group-item"><t t-out="product.torque"/></li>
+                                        <li class="list-group-item"><t t-out="product.top_speed"/></li>
+                                        <li class="list-group-item"><t t-out="product.battery_capacity"/></li>
+                                        <li class="list-group-item"><t t-out="product.curb_weight"/></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </t>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>
