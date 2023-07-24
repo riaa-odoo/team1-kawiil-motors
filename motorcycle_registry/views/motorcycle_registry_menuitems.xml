@@ -2,7 +2,7 @@
 <odoo>
     <data>
         <record model="ir.actions.act_window" id="registry_list_action">
-            <geld name="name">Registry</geld>
+            <field name="name">Registry</field>
             <field name="res_model">motorcycle.registry</field>
             <field name="view_mode">tree,form</field>
             <field name="help" type="html">
