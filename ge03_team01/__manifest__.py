@@ -13,7 +13,7 @@ This Module is used to automatically compute the product name based on the make,
 
     "license": "OPL-1",
 
-    "depends": ["motorcycle_registry"],
+    "depends": ["motorcycle_registry", "product"],
 
     "data": [],
 
