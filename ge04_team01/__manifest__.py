@@ -8,8 +8,7 @@ This Module is used to apply $2,500 discounts for new customers.
     "category": "Kauil/Registry",
     "license": "OPL-1",
     "depends": ["motorcycle_registry"],
-    "data": [],
-    "demo": [],
+    "data": ['data/pricelist_data.xml'],
     "author": "team-01",
     "website": "www.odoo.com",
     "installable": True

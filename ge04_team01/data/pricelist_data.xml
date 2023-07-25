@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data noupdate="1">
-        <record id="new_customers_list" model="product.pricelist">
-            <field name="name">New Customers Pricelist</field>
-            <field name="sequence">1</field>
+        <record id="list_new_customers" model="product.pricelist">
+            <field name="name">New Customers</field>
+            <field name="currency_id" ref="base.MXN" />
+        </record>
+        <record id="item_new_customers" model="product.pricelist.item">
+            <field name="pricelist_id" ref="list_new_customers" />
+            <field name="compute_price">formula</field>
+            <field name="base">list_price</field>
+            <field name="applied_on">3_global</field>
+            <field name="price_surcharge">-2500</field>
         </record>
     </data>
 </odoo>
