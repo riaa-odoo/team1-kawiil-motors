@@ -3,14 +3,14 @@
     <record id="sale_order_new_customer_form_inherit_sale_order" model="ir.ui.view">
         <field name="name">sale.order.new.customer.form.inherit.sale.order</field>
         <field name="model">sale.order</field>
-        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="inherit_id" ref="sale.view_order_form" />
         <field name="arch" type="xml">
-<!--             Use Xpath -->
+            <!--             Use Xpath -->
             <xpath expr="//header" position="inside">
-                <button name="new_customer" data-hotkey="v"
+                <button name="apply_discount" data-hotkey="v"
                     string="Apply Discount" type="object" context="{'validate_analytic': True}"
-                    attrs="{'invisible': [('state', 'not in', ['draft'])]}"/>
+                    attrs="{'invisible': [('state', 'not in', ['draft']), ('partner_id', '!=', False)]}" />
             </xpath>
-    </field>
+        </field>
     </record>
 </odoo>
