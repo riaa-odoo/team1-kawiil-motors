@@ -8,9 +8,6 @@ class ProductTemplate(models.Model):
 
     @api.depends("make", "model", "year")
     def _compute_name(self):
-        for record in self:
-            if record.detailed_type is not None and record.detailed_type == "motorcycle" and False not in (
-                    record.year, record.make, record.model):
-                record.name = f"{record.year} {record.make} {record.model}"
-            else:
-                record.name = ""
+        domain = [('detailed_type', 'like', 'motorcycle')]
+        for template in self.search(domain):
+            template.name = f"{template.year} {template.make} {template.model}"
