@@ -9,7 +9,8 @@ class Partner(models.Model):
     @api.depends("sale_order_ids")
     def _compute_is_new_customer(self):
         domain = [("product_id.detailed_type", "=", "motorcycle")]
-        old_customers = self.env['sale.order.line'].search(domain).mapped('order_id').mapped('partner_id')
+        old_customers = self.env["sale.order.line"].search(domain).mapped(
+            "order_id").filtered(lambda s: s.state in ["sale", "done"]).mapped("partner_id")
         self.is_new_customer = True
         for partner in old_customers:
             partner.is_new_customer = False
