@@ -7,9 +7,10 @@
         <field name="arch" type="xml">
             <!--             Use Xpath -->
             <xpath expr="//header" position="inside">
+                <field name="is_new_customer" />
                 <button name="apply_discount" data-hotkey="v"
                     string="Apply Discount" type="object" context="{'validate_analytic': True}"
-                    attrs="{'invisible': [('state', 'not in', ['draft']), ('partner_id', '!=', False)]}" />
+                    attrs="{'invisible': ['|', ('is_new_customer', '=', False), ('state', 'not in', ['draft'])]}" />
             </xpath>
         </field>
     </record>
