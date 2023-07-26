@@ -11,11 +11,11 @@ Task URL: https://www.odoo.com/web#id=3427405&cids=17&menu_id=4720&action=4665&a
     "category": "Custom Developoment",
     "license": "OPL-1",
     "depends": ["motorcycle_registry"],
-    "data": ["views/stock_lot_inherit.xml"],
-    "author": "Odoo Inc",
     "data": [
-        'views/motorcycle_registry_views.xml',
+        "views/stock_lot_inherit.xml",
+        'views/motorcycle_registry_inherit.xml'
     ],
+    "author": "Odoo Inc",
     "website": "www.odoo.com",
     "application": True
 }
