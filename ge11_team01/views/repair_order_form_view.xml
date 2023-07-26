@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="portal_my_home_menu_repair_order"
+            name="Portal layout : repair order menu entries"
+            inherit_id="portal.portal_breadcrumbs" priority="25">
+            <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+                <li t-if="page_name == 'repair_order' or repair_order"
+                    t-attf-class="breadcrumb-item #{'active ' if not repair_order else ''}">
+                    <a t-if="repair_order" t-attf-href="/repair-order/list/?{{ keep_query() }}">Orders</a>
+                    <t t-else="">Orders</t>
+                </li>
+                <li t-if="repair_order" class="breadcrumb-item active">
+                    <t t-out="repair_order.name" />
+                </li>
+            </xpath>
+        </template>
+
+        <template id="portal_my_home_repair_order" inherit_id="portal.portal_my_home">
+            <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+                <t t-call="portal.portal_docs_entry">
+                    <t t-set="title">Repair Orders</t>
+                    <t t-set="url" t-value="'/repair-order/list'"/>
+                    <t t-set="placeholder_count" t-value="'repair_count'"/>
+                </t>
+            </xpath>
+        </template>
+
+        <template id="portal_my_repair_order_list" name="My Repair Orders">
+            <t t-call="portal.portal_layout">
+                <t t-set="breadcrumbs_searchbar" t-value="True" />
+                <t t-call="portal.portal_searchbar">
+                    <t t-set="title">Repair Orders</t>
+                </t>
+                <t t-call="portal.portal_table">
+                    <thead>
+                        <tr class="active">
+                            <th>Name</th>
+                            <th>State</th>
+                            <th>Motorcycle</th>
+                            <th>VIN</th>
+                            <th>Create Date</th>
+                        </tr>
+                    </thead>
+                    <t t-foreach="orders" t-as="repair_order">
+                        <tr>
+                            <td>
+                                <a t-att-href="repair_order.get_portal_url()">
+                                    <t t-out="repair_order.name" />
+                                </a>
+                            </td>
+                            <td class="tx_status">
+                                <t t-if="repair_order.state == 'confirmed'">
+                                    <span class="badge rounded-pill text-bg-info"><i class="fa fa-fw fa-solid fa-exclamation" aria-label="Confirmed" title="Confirmed" role="img"></i><span class="d-none d-md-inline" t-field="repair_order.state"/></span>
+                                </t>
+                                <t t-if="repair_order.state == 'draft'">
+                                    <span class="badge rounded-pill text-bg-warning"><i class="fa fa-fw fa-clock-o" aria-label="Draft" title="Draft" role="img"></i><span class="d-none d-md-inline" t-field="repair_order.state"/></span>
+                                </t>
+                                <t t-if="repair_order.state == 'ready'">
+                                    <span class="badge rounded-pill text-bg-primary"><i class="fa fa-fw fa-clock-o" aria-label="Ready" title="Ready" role="img"></i><span class="d-none d-md-inline" t-field="repair_order.state"/></span>
+                                </t>
+                                <t t-if="repair_order.state == 'under_repair'">
+                                    <span class="badge rounded-pill text-bg-secondary"><i class="fa fa-fw fa-solid fa-gear" aria-label="Under Repair" title="Under Repair" role="img"></i><span class="d-none d-md-inline" t-field="repair_order.state"/></span>
+                                </t>
+                                <t t-if="repair_order.state == '2binvoiced'">
+                                    <span class="badge rounded-pill text-bg-dark"><i class="fa fa-fw fa-clock-o" aria-label="To be invoiced" title="To be invoiced" role="img"></i><span class="d-none d-md-inline" t-field="repair_order.state"/></span>
+                                </t>
+                                <t t-if="repair_order.state == 'done'">
+                                    <span class="badge rounded-pill text-bg-success"><i class="fa fa-fw fa-solid fa-check" aria-label="Done" title="Done" role="img"></i><span class="d-none d-md-inline" t-field="repair_order.state"/></span>
+                                </t>
+                                <t t-if="repair_order.state == 'cancel'">
+                                    <span class="badge rounded-pill text-bg-danger"><i class="fa fa-fw fa-solid fa-ban" aria-label="Cancel" title="Cancel" role="img"></i><span class="d-none d-md-inline" t-field="repair_order.state"/></span>
+                                </t>
+                            </td>
+                            <td>
+                                <span t-field="repair_order.registry_id.lot_id.product_id" />
+                            </td>
+                            <td>
+                                <span t-field="repair_order.vin" />
+                            </td>
+                            <td>
+                                <span t-field="repair_order.create_date" />
+                            </td>
+                        </tr>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+        <template id="portal_my_home_create_order" inherit_id="portal.portal_my_home">
+            <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+                <t t-call="portal.portal_docs_entry">
+                    <t t-set="title">Create Repair Orders</t>
+                    <t t-set="url" t-value="'/new-order/'"/>
+                    <t t-set="placeholder_count" t-value="'create_count'"/>
+                </t>
+            </xpath>
+        </template>
+
+        <template id="portal_my_new_repair_order_list" name="Create new repair order">
+            <t t-call="portal.portal_layout">
+                <t t-set="breadcrumbs_searchbar" t-value="True" />
+
+                <t t-call="portal.portal_searchbar">
+                    <t t-set="title">New Repair Order</t>
+                </t>
+                <form action="/new-order/submit">
+                    <div class="form-group" style="margin: 1em auto;">
+                        <label for="vin">VIN:</label>
+                        <input type="text" class="form-control" name="vin" id="vin" required="true" />          
+                    </div>
+                    <div class="form-group" style="margin: 1em auto;">
+                        <label for="description">Description:</label>
+                        <input type="text" class="form-control" name="description" 
+                            id="description" />
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="margin: 1em auto;">Submit</button>
+                </form>
+            </t>
+        </template>
+
+        <template id="repair_order_portal_template"
+            name="Repair Order Portal Template" inherit_id="portal.portal_sidebar"
+            primary="True">
+            <xpath expr="//div[hasclass('o_portal_sidebar')]" position="inside">
+                <t t-set="custom_html">This is the portal view of your Repair Order.</t>
+                <div class="row mt16 o_portal_sidebar">
+                    <t t-call="portal.portal_record_sidebar">
+                        <t t-set="classes" t-value="'col-lg-auto d-print-none'" />
+
+                        <t t-set="title">
+                            <h2 class="mb-0">
+                                <b t-field="repair_order.name" data-id="name" />
+                            </h2>
+                        </t>
+                        <t t-set="entries">
+                            <ul
+                                class="list-group list-group-flush flex-wrap flex-row flex-lg-column">
+                                <li t-if="repair_order.vin" class="list-group-item flex-grow-1">
+                                    <div class="small mb-1">
+                                        <strong class="text-muted">
+                                            <t>
+                                                Repair Order
+                                            </t>
+                                        </strong>
+                                    </div>
+                                </li>
+                            </ul>
+                        </t>
+                    </t>
+                    <div id="registry_content" class="col-12 col-lg justify-content-end">
+                        <div t-attf-class="card #{'pb-5' if report_type == 'html' else ''}"
+                            id="portal_order_content">
+                            <div t-call="ge11_team01.repair_order_portal_content" />
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </template>
+
+        <template id="repair_order_portal_content" name="Repair Order Portal Content">
+            <div id="introduction"
+                t-attf-class="pb-2 pt-3 #{'card-header bg-white' if report_type == 'html' else ''}">
+                <h2 class="my-0">
+                    <em t-out="repair_order.name" />
+                </h2>
+            </div>
+            <div t-attf-class="#{'card-body' if report_type == 'html' else ''}">
+                <div class="row">
+                    <div class="col-lg-6 col-12" id="informations">
+                        <div class="row" id="reg_plate">
+                            <div class="mb-3 col-6">
+                                <strong>Product to repair:</strong>
+                                <span t-field="repair_order.registry_id.lot_id.product_id" />
+                            </div>
+                        </div>
+                        <div class="row" id="reg_vin">
+                            <div class="mb-3 col-6">
+                                <strong>VIN:</strong>
+                                <span t-field="repair_order.vin" />
+                            </div>
+                        </div>
+                        <div class="row" id="reg_make">
+                            <div class="mb-3 col-6">
+                                <strong>Description:</strong>
+                                <span t-field="repair_order.description" />
+                            </div>
+                        </div>
+                        <div class="row" id="reg_model">
+                            <div class="mb-3 col-6">
+                                <strong>Order Status:</strong>
+                                <span t-field="repair_order.state" />
+                            </div>
+                        </div>
+                        <div class="row" id="reg_date">
+                            <div class="mb-3 col-6">
+                                <strong>Registration Date:</strong>
+                                <span t-field="repair_order.create_date"
+                                    t-options='{"widget": "date"}' />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template>
+
+    </data>
+</odoo>
