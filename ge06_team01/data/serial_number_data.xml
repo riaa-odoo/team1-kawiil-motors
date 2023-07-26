@@ -5,7 +5,7 @@
             <field name="name">Serial Number</field>
             <field name="code">serial.number</field>
             <field name="prefix"></field>
-            <field name="padding">5</field>
+            <field name="padding">6</field>
             <field name="number_next">1</field>
             <field name="number_increment">1</field>
         </record>
