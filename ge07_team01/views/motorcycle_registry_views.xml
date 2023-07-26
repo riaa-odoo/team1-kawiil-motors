@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="motorcycle_registry_list_view_inherit_motorcycle_registry" model="ir.ui.view">
+        <field name="name">motorcycle.registry.list.view.inherit.motorcycle.registry</field>
+        <field name="model">motorcycle.registry</field>
+        <field name="inherit_id" ref="motorcycle_registry.motorcycle_registry_view_list"/>
+        <field name="arch" type="xml">
+            <tree position="inside">
+                <field name="lot_id"/>
+            </tree>
+        </field>
+    </record>
+</odoo>
