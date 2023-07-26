@@ -12,5 +12,4 @@ class Partner(models.Model):
         old_customers = self.env["sale.order.line"].search(domain).mapped(
             "order_id").filtered(lambda s: s.state in ["sale", "done"]).mapped("partner_id")
         self.is_new_customer = True
-        for partner in old_customers:
-            partner.is_new_customer = False
+        old_customers.is_new_customer = False
