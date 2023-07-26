@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="motorcycle_registry_view_form_inherit_motorcycle_registry" model="ir.ui.view">
+        <field name="name">motorcycle.registry.view.form.inherit.motorcycle.registry</field>
+        <field name="model">motorcycle.registry</field>
+        <field name="inherit_id" ref="motorcycle_registry.motorcycle_registry_view_form" />
+        <field name="arch" type="xml">
+            <notebook position="inside">
+                <page string="Portal Settings" name="portal_settings">
+                    <group>
+                        <field name="is_public" />
+                    </group>
+                </page>
+            </notebook>
+        </field>
+    </record>
+</odoo>
