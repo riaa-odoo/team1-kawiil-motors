@@ -12,6 +12,9 @@ Task URL: https://www.odoo.com/web#id=3427405&cids=17&menu_id=4720&action=4665&a
     "license": "OPL-1",
     "depends": ["motorcycle_registry"],
     "author": "Odoo Inc",
+    "data": [
+        'views/motorcycle_registry_views.xml',
+    ],
     "website": "www.odoo.com",
     "application": True
 }
