@@ -9,7 +9,7 @@ This Module is used to apply $2,500 discounts for new customers.
     "license": "OPL-1",
     "depends": ["motorcycle_registry", "sale_management"],
     "data": ['data/pricelist_data.xml',
-             'views/sale_new_customer.xml'],
+             'views/sale_order_inherit.xml'],
     "author": "team-01",
     "website": "www.odoo.com",
     "installable": True

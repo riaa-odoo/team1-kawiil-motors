@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="sale_view_order_form_inherit_new_customer" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit.new.customer</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <field name="is_new_customer" invisible="1" />
+                <button name="apply_discount" string="Apply Discount" type="object"
+                    attrs="{'invisible': ['|', ('is_new_customer', '=', False), ('state', '!=', 'draft')]}" />
+            </xpath>
+        </field>
+    </record>
+</odoo>
