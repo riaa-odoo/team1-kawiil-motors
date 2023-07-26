@@ -6,8 +6,7 @@ class StockLot(models.Model):
     @api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list:
-            product_id = vals['product_id']
-            product = self.env['product.product'].search([("id", "=", product_id)])
+            product = self.env['product.product'].search([("id", "=", vals['product_id'])])
 
             if product.detailed_type == "motorcycle":
                 product_make = product.make[:2].upper()

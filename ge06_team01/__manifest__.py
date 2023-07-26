@@ -15,7 +15,6 @@
     "data": [
         'data/serial_number_data.xml',
     ],
-    "demo": [],
     "author": "Odoo Inc",
     "website": "www.odoo.com",
     "application": True, 
