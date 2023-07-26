@@ -11,8 +11,6 @@
     "category": "Custom Development",
     "license": "OPL-1",
     "depends": ["motorcycle_registry", "sale"],
-    "data": [],
     "author": "team-01",
     "website": "www.odoo.com",
-    "installable": True
 }

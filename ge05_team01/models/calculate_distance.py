@@ -1,4 +1,4 @@
-from odoo import fields, models, api
+from odoo import api, fields, models
 
 san_francisco = ["California", "Oregon", "Washington",
                  "Nevada", "Arizona", "Utah", "Idaho", "Montana", "Wyoming", "Colorado", "New Mexico", "Sonora", "Sinaloa", "Nayarit", "Baja California", "Baja California Sur"]
@@ -11,20 +11,12 @@ class SaleOrder(models.Model):
 
     @api.depends("user_id", "company_id", "partner_id")
     def _compute_warehouse_id(self):
-        our_warehouses = [
-            (san_francisco, "San Francisco Dealership"),
-            (buffalo, "Buffalo Dealership"),
-        ]
-
-        for sales in self:
-            for item in our_warehouses:
-                if sales.partner_id.state_id.name in item[0]:
-                    warehouse_id = self.env["stock.warehouse"].search(
-                        [("name", "=", item[1])])
-                    break
-                else:
-                    warehouse_id = self.env["stock.warehouse"].search(
-                        [("id", "=", "1")])
-
-            if warehouse_id:
-                sales.warehouse_id = warehouse_id
+        for order in self:
+            if order.partner_id.state_id.name in san_francisco:
+                order.warehouse_id = self.env["stock.warehouse"].search(
+                    [("name", "=", "San Francisco Dealership")])
+            elif order.partner_id.state_id.name in buffalo:
+                order.warehouse_id = self.env["stock.warehouse"].search(
+                    [("name", "=", "Buffalo Dealership")])
+            else:
+                return super()._compute_warehouse_id()
