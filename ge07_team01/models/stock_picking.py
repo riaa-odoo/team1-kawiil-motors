@@ -10,7 +10,6 @@ class Picking(models.Model):
         for line in self.move_line_ids.filtered(
                 lambda l: l.product_id.detailed_type == "motorcycle" and l.state == "done"):
             vals = {
-                "vin": line.lot_id.name,
                 "sale_order_id": self.sale_id.id,
                 "lot_ids": [line.lot_id.id]
             }

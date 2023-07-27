@@ -1,5 +1,5 @@
 {
-    "name": "Generate serial number as a VIN",
+    "name": "GE06 Team 01",
     "summary": "Compute serial number from a VIN",
     "description": """
     This module create a serial number using the same format as a VIN, 
@@ -17,5 +17,5 @@
     ],
     "author": "Odoo Inc",
     "website": "www.odoo.com",
-    "application": True, 
+    "application": True,
 }
