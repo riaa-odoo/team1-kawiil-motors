@@ -9,6 +9,7 @@ class MotorcycleRegistry(models.Model):
     lot_id = fields.Many2one("stock.lot", string="Lot ID", compute="_compute_lot_id")
     sale_order_id = fields.Many2one("sale.order")
     owner_id = fields.Many2one("res.partner", string="Owner", related="sale_order_id.partner_id")
+    registry_date = fields.Date(string='Registration Date', default=fields.Date.today())
 
     @api.constrains("lot_ids")
     def _check_lot_ids(self):
