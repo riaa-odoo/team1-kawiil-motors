@@ -9,7 +9,7 @@ Developers: [DIZR] Diego Zúñiga Rodríguez, [RIAA] Ricardo Alonso, [JIVP] Jord
 Task ID: GE7
 Task URL: https://www.odoo.com/web#id=3427405&cids=17&menu_id=4720&action=4665&active_id=3427418&model=project.task&view_type=form
     """,
-    "version": "0.1",
+    "version": "1.0.0",
     "category": "Custom Developoment",
     "license": "OPL-1",
     "depends": ["ge06_team01", "motorcycle_registry", "sale", "stock"],
