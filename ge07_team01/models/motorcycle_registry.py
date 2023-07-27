@@ -8,6 +8,8 @@ class MotorcycleRegistry(models.Model):
     lot_ids = fields.One2many("stock.lot", "registry_id", string="Lot IDs")
     lot_id = fields.Many2one("stock.lot", string="Lot ID", compute="_compute_lot_id")
     sale_order_id = fields.Many2one("sale.order")
+
+    vin = fields.Char(string="VIN", required=False)
     owner_id = fields.Many2one("res.partner", string="Owner", related="sale_order_id.partner_id")
     registry_date = fields.Date(string='Registration Date', default=fields.Date.today())
 
@@ -19,7 +21,7 @@ class MotorcycleRegistry(models.Model):
 
     @api.depends("lot_ids")
     def _compute_lot_id(self):
-        self.lot_id = ""
+        self.lot_id = False
         for registry in self.filtered(lambda r: r.lot_ids is not False and len(r.lot_ids) > 0):
             registry.lot_id = registry.lot_ids[0]
 
