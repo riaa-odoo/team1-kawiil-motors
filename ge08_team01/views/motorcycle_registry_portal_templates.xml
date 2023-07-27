@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <template id="portal_my_home_menu_motorcycle_registry"
+            name="Portal layout : motorcycle registry menu entries"
+            inherit_id="portal.portal_breadcrumbs" priority="25">
+            <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+                <li t-if="page_name == 'motorcycle_registry' or registry"
+                    t-attf-class="breadcrumb-item #{'active ' if not registry else ''}">
+                    <a t-if="registry" t-attf-href="/my/registries?{{ keep_query() }}">Registries</a>
+                    <t t-else="">Registries</t>
+                </li>
+                <li t-if="registry" class="breadcrumb-item active">
+                    <span />
+                    <t t-out="registry.registry_number" />
+                </li>
+            </xpath>
+        </template>
+
+        <template id="portal_my_home_motorcycle_registry" name="Show Motorcycle Registries"
+            customize_show="True" inherit_id="portal.portal_my_home" priority="20">
+            <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+                <t t-call="portal.portal_docs_entry">
+                    <t t-set="title">Motorcycle Registries</t>
+                    <t t-set="url" t-value="'/my/registries'" />
+                    <t t-set="placeholder_count" t-value="'registry_count'" />
+                </t>
+            </xpath>
+        </template>
+
+        <template id="portal_my_motorcycle_registries_list" name="My Motorcycle Registries">
+            <t t-call="portal.portal_layout">
+                <t t-set="breadcrumbs_searchbar" t-value="True" />
+
+                <t t-call="portal.portal_searchbar">
+                    <t t-set="title">Motorcycle Registries</t>
+                </t>
+                <t t-call="portal.portal_table">
+                    <thead>
+                        <tr class="active">
+                            <th>Registry #</th>
+                            <th>VIN</th>
+                            <th>Make</th>
+                            <th>Model</th>
+                            <th>License Plate Number</th>
+                            <th>Owner</th>
+                            <th>Lot ID</th>
+                        </tr>
+                    </thead>
+                    <t t-foreach="registries" t-as="registry">
+                        <tr>
+                            <td>
+                                <a t-att-href="registry.get_portal_url()">
+                                    <t t-out="registry.registry_number" />
+                                </a>
+                            </td>
+                            <td>
+                                <span t-field="registry.vin" />
+                            </td>
+                            <td>
+                                <span t-field="registry.make" />
+                            </td>
+                            <td>
+                                <span t-field="registry.model" />
+                            </td>
+                            <td>
+                                <span t-field="registry.license_plate" />
+                            </td>
+                            <td>
+                                <span t-field="registry.owner_id" />
+                            </td>
+                            <td>
+                                <span t-field="registry.lot_id" />
+                            </td>
+                        </tr>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+        <template id="motorcycle_registry_portal_template"
+            name="Motorcycle Registry Portal Template" inherit_id="portal.portal_sidebar"
+            primary="True">
+            <xpath expr="//div[hasclass('o_portal_sidebar')]" position="inside">
+                <t t-set="custom_html">This is the portal view of your Motorcycle Registry.</t>
+                <t t-if="registry.owner_id == env.user.partner_id"
+                    t-set="o_portal_fullwidth_alert"
+                    groups="motorcycle_registry.group_registry_user">
+                    <t t-call="portal.portal_back_in_edit_mode" />
+                </t>
+
+                <div class="row mt16 o_portal_sidebar">
+                    <!-- Sidebar -->
+                    <t t-call="portal.portal_record_sidebar">
+                        <t t-set="classes" t-value="'col-lg-auto d-print-none'" />
+
+                        <t t-set="title">
+                            <h2 class="mb-0">
+                                <b t-field="registry.make" data-id="vin" />
+                                <b t-field="registry.model" data-id="model" />
+                            </h2>
+                        </t>
+                        <t t-set="entries">
+                            <ul
+                                class="list-group list-group-flush flex-wrap flex-row flex-lg-column">
+                                <li t-if="registry.owner_id" class="list-group-item flex-grow-1">
+                                    <div class="small mb-1">
+                                        <strong class="text-muted">
+                                            <t>
+                                                Owner
+                                            </t>
+                                        </strong>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col flex-grow-0 pe-2">
+                                            <img class="rounded-circle mt-1 o_portal_contact_img"
+                                                t-att-src="image_data_uri(registry.owner_id.avatar_1024)"
+                                                alt="Contact" />
+                                        </div>
+                                        <div class="col ps-0">
+                                            <span t-field="registry.owner_id"
+                                                t-options='{"widget": "contact", "fields": ["name", "phone", "email"], "no_marker": True}' />
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </t>
+                    </t>
+
+                    <div id="registry_content" class="col-12 col-lg justify-content-end">
+                        <!-- main content -->
+                        <div t-attf-class="card #{'pb-5' if report_type == 'html' else ''}"
+                            id="portal_registry_content">
+                            <div t-call="ge08_team01.motorcycle_registry_portal_content" />
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </template>
+
+        <template id="motorcycle_registry_portal_content" name="Motorcycle Registry Portal Content">
+            <!-- Intro -->
+            <div id="introduction"
+                t-attf-class="pb-2 pt-3 #{'card-header bg-white' if report_type == 'html' else ''}">
+                <h2 class="my-0">
+                    <em t-out="registry.registry_number" />
+                </h2>
+            </div>
+
+            <div t-attf-class="#{'card-body' if report_type == 'html' else ''}">
+                <!-- Informations -->
+                <div class="row">
+                    <div t-if="registry.picture" class="col-lg-6 col-12" id="reg_picture">
+                        <div class="o_field_widget o_field_image oe_avatar">
+                            <div style="height: 256px; overflow:hidden;">
+                                <div t-field="registry.picture"
+                                    t-options="{'widget': 'image', 'qweb_img_responsive': True, 'class': 'img img-fluid w-100'}" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-12" id="informations">
+                        <div class="row" id="reg_date">
+                            <div class="mb-3 col-6">
+                                <strong>Registration Date:</strong>
+                                <span t-field="registry.registry_date"
+                                    t-options='{"widget": "date"}' />
+                            </div>
+                        </div>
+                        <div class="row" id="reg_vin">
+                            <div class="mb-3 col-6">
+                                <strong>VIN:</strong>
+                                <span t-field="registry.vin" />
+                            </div>
+                        </div>
+                        <div class="row" id="reg_make">
+                            <div class="mb-3 col-6">
+                                <strong>Make:</strong>
+                                <span t-field="registry.make" />
+                            </div>
+                        </div>
+                        <div class="row" id="reg_model">
+                            <div class="mb-3 col-6">
+                                <strong>Model:</strong>
+                                <span t-field="registry.model" />
+                            </div>
+                        </div>
+                        <div class="row" id="reg_mileage">
+                            <div class="mb-3 col-6">
+                                <strong>Current mileage:</strong>
+                                <span t-field="registry.current_mileage" />
+                            </div>
+                        </div>
+                        <div class="row" id="reg_plate">
+                            <div class="mb-3 col-6">
+                                <strong>License Plate Number:</strong>
+                                <span t-field="registry.license_plate" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template>
+    </data>
+</odoo>
