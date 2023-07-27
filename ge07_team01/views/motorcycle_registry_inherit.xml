@@ -6,13 +6,15 @@
         <field name="inherit_id" ref="motorcycle_registry.motorcycle_registry_view_form" />
         <field name="arch" type="xml">
             <field name="picture" position="before">
+                <field name="sale_order_id" invisible="1" />
                 <div class="oe_button_box" name="button_box">
                     <button class="oe_stat_button"
                         type="object"
                         name="action_view_sale_order"
-                        string="Sale"
-                        title="Sale"
-                        icon="fa-usd">
+                        string="Sale Order"
+                        title="Sale Order"
+                        icon="fa-usd"
+                        attrs="{'invisible': [('sale_order_id', '=', False)]}">
                     </button>
                 </div>
             </field>

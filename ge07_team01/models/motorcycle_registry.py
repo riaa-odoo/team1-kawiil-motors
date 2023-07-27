@@ -24,5 +24,6 @@ class MotorcycleRegistry(models.Model):
 
     def action_view_sale_order(self):
         action = self.env['ir.actions.act_window']._for_xml_id('sale.action_orders')
-        action["domain"] = [("id", "=", self.sale_order_id.id)]
+        action["views"] = [(False, 'form')]
+        action["res_id"] = self.sale_order_id.id
         return action

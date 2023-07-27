@@ -3,7 +3,7 @@ from odoo import models
 
 class Picking(models.Model):
     _inherit = "stock.picking"
-
+    
     def _action_done(self):
         res = super()._action_done()
         vals_list = []
