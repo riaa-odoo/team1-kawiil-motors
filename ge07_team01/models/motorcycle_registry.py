@@ -22,7 +22,7 @@ class MotorcycleRegistry(models.Model):
     @api.depends("lot_ids")
     def _compute_lot_id(self):
         self.lot_id = False
-        for registry in self.filtered(lambda r: r.lot_ids is not False and len(r.lot_ids) > 0):
+        for registry in self.filtered(lambda r: r.lot_ids and len(r.lot_ids) > 0):
             registry.lot_id = registry.lot_ids[0]
 
     def action_view_sale_order(self):
