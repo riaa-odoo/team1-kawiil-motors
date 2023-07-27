@@ -21,3 +21,8 @@ class MotorcycleRegistry(models.Model):
         self.lot_id = ""
         for registry in self.filtered(lambda r: r.lot_ids is not False and len(r.lot_ids) > 0):
             registry.lot_id = registry.lot_ids[0]
+
+    def action_view_sale_order(self):
+        action = self.env['ir.actions.act_window']._for_xml_id('sale.action_orders')
+        action["domain"] = [("id", "=", self.sale_order_id.id)]
+        return action

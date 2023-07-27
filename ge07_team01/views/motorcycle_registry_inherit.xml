@@ -1,5 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <record id="motorcycle_registry_view_form_inherit_motorcycle_registry" model="ir.ui.view">
+        <field name="name">motorcycle.registry.view.form.inherit.motorcycle.registry</field>
+        <field name="model">motorcycle.registry</field>
+        <field name="inherit_id" ref="motorcycle_registry.motorcycle_registry_view_form" />
+        <field name="arch" type="xml">
+            <field name="picture" position="before">
+                <div class="oe_button_box" name="button_box">
+                    <button class="oe_stat_button"
+                        type="object"
+                        name="action_view_sale_order"
+                        string="Sale"
+                        title="Sale"
+                        icon="fa-usd">
+                    </button>
+                </div>
+            </field>
+        </field>
+    </record>
+
     <record id="motorcycle_registry_view_list_inherit_motorcycle_registry" model="ir.ui.view">
         <field name="name">motorcycle.registry.view.list.inherit.motorcycle.registry</field>
         <field name="model">motorcycle.registry</field>
