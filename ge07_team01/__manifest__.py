@@ -10,7 +10,7 @@ Task URL: https://www.odoo.com/web#id=3427405&cids=17&menu_id=4720&action=4665&a
     "version": "0.1",
     "category": "Custom Developoment",
     "license": "OPL-1",
-    "depends": ["motorcycle_registry"],
+    "depends": ["ge06_team01", "motorcycle_registry", "sale", "stock"],
     "data": [
         "views/stock_lot_inherit.xml",
         'views/motorcycle_registry_inherit.xml'
