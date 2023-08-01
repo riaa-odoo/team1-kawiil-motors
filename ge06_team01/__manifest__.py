@@ -17,5 +17,5 @@
     ],
     "author": "Odoo Inc",
     "website": "www.odoo.com",
-    "application": True, 
+    "application": True,
 }
