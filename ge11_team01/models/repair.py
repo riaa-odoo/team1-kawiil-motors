@@ -12,7 +12,6 @@ class RepairOrder(models.Model):
         return self.env.ref("repair.stock_production_lot_view_form")
 
     def _compute_access_url(self):
-        super()._compute_access_url()
         for order in self:
             order.access_url = f"/repairorder/{order.id}"
 
