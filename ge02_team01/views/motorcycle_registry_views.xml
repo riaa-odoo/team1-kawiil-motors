@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="ge02_team01_map_view" model="ir.ui.view">
+        <field name="name">ge02.team01.view.map</field>
+        <field name="model">motorcycle.registry</field>
+        <field name="arch" type="xml">
+            <map res_partner="owner_id"/>
+        </field>
+    </record>
+</odoo>
