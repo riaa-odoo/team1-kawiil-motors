@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <template id='s_registry_miles' name='Registry Miles'>
+        <section class='s_registry_miles'
+            data-border-color='o-color-1'
+            data-layout='box'
+            data-text-color='o-color-1'>
+            <div class='s_registry_miles_wrapper text-center'/>
+        </section>
+    </template>
+
+    <template id='registry_miles_snippet_options' inherit_id='website.snippet_options'
+        name='Registry Miles Snippet Options'>
+        <xpath expr='.' position='inside'>
+            <div data-js='RegistryMiles' data-selector='.s_registry_miles'>
+                <we-select string='Layout'>
+                    <we-button data-layout='box' data-name='box_layout_opt'>Box</we-button>
+                    <we-button data-layout='text'>Text</we-button>
+                </we-select>
+                <we-colorpicker string='Border Color'
+                    data-attribute-name='borderColor'
+                    data-dependencies='box_layout_opt'
+                    data-select-data-attribute=''/>
+                <we-colorpicker string='Text Color' data-attribute-name='textColor'
+                    data-select-data-attribute=''/>
+            </div>
+        </xpath>
+        <xpath expr='//*[@t-set="so_content_addition_selector"]' position='inside'>
+            , .s_registry_miles
+        </xpath>
+    </template>
+
+    <record id='ge10_team01.s_registry_miles_000_js' model='ir.asset'>
+        <field name='name'>Registry Miles 000 JS</field>
+        <field name='bundle'>web.assets_frontend</field>
+        <field name='path'>ge10_team01/static/src/snippets/s_registry_miles/000.js</field>
+    </record>
+</odoo>
